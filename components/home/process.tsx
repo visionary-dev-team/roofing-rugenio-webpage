@@ -41,13 +41,15 @@ export function Process() {
           {steps.map((step, i) => (
             <Reveal key={step.title} delay={i * 0.1}>
               <div className="relative">
-                <span className="font-display text-6xl font-black text-primary/20">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="absolute left-0 top-2 flex size-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg">
-                  <step.icon className="size-6" />
-                </span>
-                <h3 className="mt-4 font-display text-xl font-extrabold tracking-tight text-foreground">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="flex size-11 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md shrink-0">
+                    <step.icon className="size-5" />
+                  </span>
+                  <span className="font-display text-4xl font-black tracking-tight text-primary/30">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 className="font-display text-xl font-extrabold tracking-tight text-foreground">
                   {step.title}
                 </h3>
                 <p className="mt-2 text-pretty text-sm leading-relaxed text-muted-foreground">
