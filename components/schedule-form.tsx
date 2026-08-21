@@ -13,14 +13,44 @@ const fieldClass =
 const labelClass = "mb-1.5 block text-sm font-semibold text-foreground"
 
 export function ScheduleForm() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle")
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus("submitting")
-    // Simulate a request round-trip; wire to email/DB when a backend is connected.
-    await new Promise((r) => setTimeout(r, 1100))
-    setStatus("success")
+    setErrorMessage(null)
+
+    const formData = new FormData(e.currentTarget)
+    const payload = {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+      address: formData.get("address"),
+      service: formData.get("service"),
+      date: formData.get("date"),
+      message: formData.get("message"),
+    }
+
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+
+      if (response.ok) {
+        setStatus("success")
+      } else {
+        const data = await response.json().catch(() => ({}))
+        setErrorMessage(data.error || "Failed to send request. Please try again.")
+        setStatus("error")
+      }
+    } catch (err) {
+      console.error("Error submitting form:", err)
+      setErrorMessage("Network error. Please try again.")
+      setStatus("error")
+    }
   }
 
   if (status === "success") {
@@ -133,6 +163,12 @@ export function ScheduleForm() {
           />
         </div>
       </div>
+
+      {status === "error" && errorMessage && (
+        <div className="mt-4 rounded-lg bg-destructive/10 border border-destructive/20 p-4 text-sm text-destructive font-medium">
+          {errorMessage}
+        </div>
+      )}
 
       <Button
         type="submit"
