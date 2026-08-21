@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next"
 import { business, serviceAreas } from "@/lib/business"
 import { services } from "@/lib/services"
 
+export const dynamic = "force-static"
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = business.domain
   const lastModified = new Date()
