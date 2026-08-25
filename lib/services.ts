@@ -10,7 +10,7 @@ export type PortfolioImage = {
 export type PortfolioItem = {
   id: string;
   title: string;
-  description: string;
+  description: string; 
   city?: string;
   state?: string;
   completedAt?: string;
