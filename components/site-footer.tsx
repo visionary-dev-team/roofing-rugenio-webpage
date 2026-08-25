@@ -51,6 +51,11 @@ export function SiteFooter() {
             </h3>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
+                <Link href="/about" className="text-ink-foreground/70 hover:text-primary">
+                  About Us &amp; Our Story
+                </Link>
+              </li>
+              <li>
                 <Link href="/#why" className="text-ink-foreground/70 hover:text-primary">
                   Why Rugerios
                 </Link>

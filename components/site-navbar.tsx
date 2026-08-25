@@ -9,6 +9,7 @@ import { LinkButton } from "@/components/ui/link-button"
 import { business } from "@/lib/business"
 
 const links = [
+  { href: "/about", label: "About" },
   { href: "/#services", label: "Services" },
   { href: "/#process", label: "Process" },
   { href: "/#why", label: "Why Us" },
