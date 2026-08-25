@@ -24,7 +24,7 @@ export type Service = {
   slug: string;
   title: string;
   short: string;
-  description: string;
+  description: string; 
   image: string;
   features: string[];
   steps: { title: string; detail: string }[];
