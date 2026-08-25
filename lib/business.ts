@@ -12,7 +12,7 @@ export const business = {
   emailHref: "mailto:info@rugeriosroofing.com",
   priceRange: "$$",
   yearsInBusiness: 10,
-  roofsCompleted: 500,
+  roofsCompleted: 500, 
   logo: "/images/rugerios-logo.png",
   heroImage: "/images/hero-roof.webp",
   // Approximate coordinates for Aurora, IL.
