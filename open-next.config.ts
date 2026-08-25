@@ -9,6 +9,7 @@ export default {
       queue: "dummy",
     },
   },
+  buildCommand: "npx next build",
   edgeExternals: ["node:crypto"],
   middleware: {
     external: true,
