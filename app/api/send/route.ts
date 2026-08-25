@@ -1,6 +1,4 @@
-import { EmailTemplate } from "@/components/EmailTemplate";
-import { render } from "@react-email/render";
-import { Resend } from "resend";
+import { renderEmailHtml } from "@/components/EmailTemplate";
 
 export async function POST(request: Request) {
   try {
@@ -21,7 +19,6 @@ export async function POST(request: Request) {
       );
     }
 
-    const resend = new Resend(apiKey);
     const body = await request.json();
     const { name, email, phone, address, service, date, message } = body;
 
@@ -36,32 +33,42 @@ export async function POST(request: Request) {
       );
     }
 
-    const emailHtml = await render(
-      EmailTemplate({
-        name,
-        email,
-        phone,
-        address,
-        service,
-        date,
-        message,
-      }) as React.ReactElement
-    );
-
-    const { data, error } = await resend.emails.send({
-      from: fromEmail,
-      to: [recipientEmail],
-      replyTo: email,
-      subject: `New Inspection Request from ${name}`,
-      html: emailHtml,
+    const emailHtml = renderEmailHtml({
+      name,
+      email,
+      phone,
+      address,
+      service,
+      date,
+      message,
     });
 
-    if (error) {
-      console.error("Resend API error:", error);
-      return Response.json({ error: error.message || "Failed to send email" }, { status: 500 });
+    const resendResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: fromEmail,
+        to: [recipientEmail],
+        reply_to: email,
+        subject: `New Inspection Request from ${name}`,
+        html: emailHtml,
+      }),
+    });
+
+    const resendData = await resendResponse.json();
+
+    if (!resendResponse.ok) {
+      console.error("Resend API error:", resendData);
+      return Response.json(
+        { error: (resendData as { message?: string })?.message || "Failed to send email" },
+        { status: resendResponse.status }
+      );
     }
 
-    return Response.json({ message: "Email sent successfully", data });
+    return Response.json({ message: "Email sent successfully", data: resendData });
   } catch (error) {
     console.error("Error processing send email request:", error);
     return Response.json(
@@ -70,3 +77,4 @@ export async function POST(request: Request) {
     );
   }
 }
+

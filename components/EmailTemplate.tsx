@@ -1,16 +1,3 @@
-import * as React from "react";
-import {
-  Html,
-  Body,
-  Container,
-  Text,
-  Heading,
-  Section,
-  Hr,
-  Link,
-  Button,
-} from "@react-email/components";
-
 interface EmailTemplateProps {
   name: string;
   email: string;
@@ -30,7 +17,7 @@ const serviceTitles: Record<string, string> = {
   "not-sure": "Not Sure Yet / Consultation",
 };
 
-export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
+export function renderEmailHtml({
   name,
   email,
   phone,
@@ -38,262 +25,112 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   service,
   date,
   message,
-}) => {
+}: EmailTemplateProps): string {
   const displayService = serviceTitles[service] || service;
+  const preferredDate = date || "As soon as possible";
 
-  return (
-    <Html>
-      <Body
-        style={{
-          fontFamily:
-            '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-          backgroundColor: "#f5f5f4",
-          margin: 0,
-          padding: "32px 0",
-        }}
-      >
-        <Container
-          style={{
-            maxWidth: "600px",
-            margin: "0 auto",
-            backgroundColor: "#ffffff",
-            borderRadius: "16px",
-            overflow: "hidden",
-            boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
-            border: "1px solid #e7e5e4",
-          }}
-        >
-          {/* Header Banner - Matching Site Dark Ink #18181b */}
-          <Section
-            style={{
-              backgroundColor: "#18181b",
-              padding: "28px 32px",
-              textAlign: "left",
-              borderBottom: "4px solid #d95338",
-            }}
-          >
-            <Text
-              style={{
-                color: "#d95338",
-                fontSize: "12px",
-                fontWeight: "800",
-                textTransform: "uppercase",
-                letterSpacing: "2px",
-                margin: "0 0 6px 0",
-              }}
-            >
-              RUGERIOS ROOFING — WEB INQUIRY
-            </Text>
-            <Heading
-              style={{
-                color: "#ffffff",
-                fontSize: "22px",
-                fontWeight: "800",
-                margin: 0,
-                lineHeight: "1.3",
-              }}
-            >
-              🔨 New Free Inspection Request
-            </Heading>
-          </Section>
+  const sanitize = (str: string = "") =>
+    str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 
-          {/* Body Content */}
-          <Section style={{ padding: "32px" }}>
-            <Text
-              style={{
-                color: "#57534e",
-                fontSize: "14px",
-                lineHeight: "1.6",
-                marginTop: 0,
-                marginBottom: "24px",
-              }}
-            >
-              A new prospect has submitted the <strong>Free Inspection</strong> form on <strong>rugeriosroofing.com</strong>.
-            </Text>
+  const safeName = sanitize(name);
+  const safeEmail = sanitize(email);
+  const safePhone = sanitize(phone);
+  const safeAddress = sanitize(address);
+  const safeService = sanitize(displayService);
+  const safeDate = sanitize(preferredDate);
+  const safeMessage = message ? sanitize(message) : "";
 
-            {/* Customer Details Box - Styled like site cards */}
-            <Section
-              style={{
-                backgroundColor: "#fafaf9",
-                padding: "22px",
-                borderRadius: "12px",
-                border: "1px solid #e7e5e4",
-                borderLeft: "4px solid #d95338",
-                marginBottom: "24px",
-              }}
-            >
-              <Heading
-                as="h3"
-                style={{
-                  color: "#1c1917",
-                  fontSize: "15px",
-                  fontWeight: "800",
-                  margin: "0 0 16px 0",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.8px",
-                }}
-              >
-                👤 Customer Details
-              </Heading>
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Free Inspection Request</title>
+</head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f5f5f4; margin: 0; padding: 32px 0;">
+  <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); border: 1px solid #e7e5e4;">
+    <!-- Header Banner -->
+    <div style="background-color: #18181b; padding: 28px 32px; text-align: left; border-bottom: 4px solid #d95338;">
+      <p style="color: #d95338; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 6px 0;">
+        RUGERIOS ROOFING — WEB INQUIRY
+      </p>
+      <h1 style="color: #ffffff; font-size: 22px; font-weight: 800; margin: 0; line-height: 1.3;">
+        🔨 New Free Inspection Request
+      </h1>
+    </div>
 
-              <Text style={{ margin: "8px 0", color: "#292524", fontSize: "15px" }}>
-                <strong>Full Name:</strong> {name}
-              </Text>
+    <!-- Body Content -->
+    <div style="padding: 32px;">
+      <p style="color: #57534e; font-size: 14px; line-height: 1.6; margin-top: 0; margin-bottom: 24px;">
+        A new prospect has submitted the <strong>Free Inspection</strong> form on <strong>rugeriosroofing.com</strong>.
+      </p>
 
-              <Text style={{ margin: "8px 0", color: "#292524", fontSize: "15px" }}>
-                <strong>Phone:</strong>{" "}
-                <Link
-                  href={`tel:${phone}`}
-                  style={{
-                    color: "#d95338",
-                    fontWeight: "700",
-                    textDecoration: "none",
-                  }}
-                >
-                  {phone} 📞
-                </Link>
-              </Text>
+      <!-- Customer Details Box -->
+      <div style="background-color: #fafaf9; padding: 22px; border-radius: 12px; border: 1px solid #e7e5e4; border-left: 4px solid #d95338; margin-bottom: 24px;">
+        <h3 style="color: #1c1917; font-size: 15px; font-weight: 800; margin: 0 0 16px 0; text-transform: uppercase; letter-spacing: 0.8px;">
+          👤 Customer Details
+        </h3>
+        <p style="margin: 8px 0; color: #292524; font-size: 15px;">
+          <strong>Full Name:</strong> ${safeName}
+        </p>
+        <p style="margin: 8px 0; color: #292524; font-size: 15px;">
+          <strong>Phone:</strong> <a href="tel:${safePhone}" style="color: #d95338; font-weight: 700; text-decoration: none;">${safePhone} 📞</a>
+        </p>
+        <p style="margin: 8px 0; color: #292524; font-size: 15px;">
+          <strong>Email:</strong> <a href="mailto:${safeEmail}" style="color: #d95338; font-weight: 700; text-decoration: none;">${safeEmail} ✉️</a>
+        </p>
+        <p style="margin: 8px 0; color: #292524; font-size: 15px;">
+          <strong>Property Address:</strong> ${safeAddress} 📍
+        </p>
+      </div>
 
-              <Text style={{ margin: "8px 0", color: "#292524", fontSize: "15px" }}>
-                <strong>Email:</strong>{" "}
-                <Link
-                  href={`mailto:${email}`}
-                  style={{
-                    color: "#d95338",
-                    fontWeight: "700",
-                    textDecoration: "none",
-                  }}
-                >
-                  {email} ✉️
-                </Link>
-              </Text>
+      <!-- Project Details Box -->
+      <div style="background-color: #fafaf9; padding: 22px; border-radius: 12px; border: 1px solid #e7e5e4; border-left: 4px solid #18181b; margin-bottom: 28px;">
+        <h3 style="color: #1c1917; font-size: 15px; font-weight: 800; margin: 0 0 16px 0; text-transform: uppercase; letter-spacing: 0.8px;">
+          🏠 Inspection Request Details
+        </h3>
+        <p style="margin: 8px 0; color: #292524; font-size: 15px;">
+          <strong>Service Needed:</strong> <span style="background-color: #ffedd5; color: #c2410c; padding: 4px 10px; border-radius: 6px; font-weight: 700; font-size: 14px;">${safeService}</span>
+        </p>
+        <p style="margin: 8px 0; color: #292524; font-size: 15px;">
+          <strong>Preferred Date:</strong> ${safeDate} 📅
+        </p>
+        ${
+          safeMessage
+            ? `<div style="margin-top: 16px;">
+                <p style="margin: 0 0 8px 0; color: #1c1917; font-size: 14px; font-weight: 700;">
+                  Tell Us About Your Roof:
+                </p>
+                <p style="color: #44403c; background-color: #ffffff; padding: 14px 16px; border-radius: 8px; border: 1px solid #d6d3d1; line-height: 1.6; font-size: 14px; margin: 0; font-style: italic;">
+                  "${safeMessage}"
+                </p>
+              </div>`
+            : ""
+        }
+      </div>
 
-              <Text style={{ margin: "8px 0", color: "#292524", fontSize: "15px" }}>
-                <strong>Property Address:</strong> {address} 📍
-              </Text>
-            </Section>
+      <!-- Action Button -->
+      <div style="text-align: center; margin: 24px 0 12px 0;">
+        <a href="mailto:${safeEmail}?subject=RE:%20Rugerios%20Roofing%20Free%20Inspection%20Request" style="background-color: #d95338; color: #ffffff; font-size: 15px; font-weight: 800; padding: 14px 28px; border-radius: 10px; text-decoration: none; display: inline-block; box-shadow: 0 4px 12px rgba(217, 83, 56, 0.3);">
+          Reply to Customer Direct ✉️
+        </a>
+      </div>
+    </div>
 
-            {/* Project Details Box */}
-            <Section
-              style={{
-                backgroundColor: "#fafaf9",
-                padding: "22px",
-                borderRadius: "12px",
-                border: "1px solid #e7e5e4",
-                borderLeft: "4px solid #18181b",
-                marginBottom: "28px",
-              }}
-            >
-              <Heading
-                as="h3"
-                style={{
-                  color: "#1c1917",
-                  fontSize: "15px",
-                  fontWeight: "800",
-                  margin: "0 0 16px 0",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.8px",
-                }}
-              >
-                🏠 Inspection Request Details
-              </Heading>
+    <hr style="border: 0; border-top: 1px solid #e7e5e4; margin: 0;" />
 
-              <Text style={{ margin: "8px 0", color: "#292524", fontSize: "15px" }}>
-                <strong>Service Needed:</strong>{" "}
-                <span
-                  style={{
-                    backgroundColor: "#ffedd5",
-                    color: "#c2410c",
-                    padding: "4px 10px",
-                    borderRadius: "6px",
-                    fontWeight: "700",
-                    fontSize: "14px",
-                  }}
-                >
-                  {displayService}
-                </span>
-              </Text>
-
-              <Text style={{ margin: "8px 0", color: "#292524", fontSize: "15px" }}>
-                <strong>Preferred Date:</strong> {date || "As soon as possible"} 📅
-              </Text>
-
-              {message && (
-                <div style={{ marginTop: "16px" }}>
-                  <Text
-                    style={{
-                      margin: "0 0 8px 0",
-                      color: "#1c1917",
-                      fontSize: "14px",
-                      fontWeight: "700",
-                    }}
-                  >
-                    Tell Us About Your Roof:
-                  </Text>
-                  <Text
-                    style={{
-                      color: "#44403c",
-                      backgroundColor: "#ffffff",
-                      padding: "14px 16px",
-                      borderRadius: "8px",
-                      border: "1px solid #d6d3d1",
-                      lineHeight: "1.6",
-                      fontSize: "14px",
-                      margin: 0,
-                      fontStyle: "italic",
-                    }}
-                  >
-                    "{message}"
-                  </Text>
-                </div>
-              )}
-            </Section>
-
-            {/* Primary Action Button - Matching Site Button Style */}
-            <Section style={{ textAlign: "center", margin: "24px 0 12px 0" }}>
-              <Button
-                href={`mailto:${email}?subject=RE:%20Rugerios%20Roofing%20Free%20Inspection%20Request`}
-                style={{
-                  backgroundColor: "#d95338",
-                  color: "#ffffff",
-                  fontSize: "15px",
-                  fontWeight: "800",
-                  padding: "14px 28px",
-                  borderRadius: "10px",
-                  textDecoration: "none",
-                  display: "inline-block",
-                  boxShadow: "0 4px 12px rgba(217, 83, 56, 0.3)",
-                }}
-              >
-                Reply to Customer Direct ✉️
-              </Button>
-            </Section>
-          </Section>
-
-          <Hr style={{ borderColor: "#e7e5e4", margin: 0 }} />
-
-          {/* Footer */}
-          <Section style={{ padding: "20px 32px", backgroundColor: "#fafaf9" }}>
-            <Text
-              style={{
-                fontSize: "12px",
-                color: "#78716c",
-                textAlign: "center",
-                margin: 0,
-                lineHeight: "1.5",
-              }}
-            >
-              Sent automatically from the official schedule form at{" "}
-              <Link
-                href="https://rugeriosroofing.com"
-                style={{ color: "#d95338", textDecoration: "underline" }}
-              >
-                rugeriosroofing.com
-              </Link>
-            </Text>
-          </Section>
-        </Container>
-      </Body>
-    </Html>
-  );
-};
+    <!-- Footer -->
+    <div style="padding: 20px 32px; background-color: #fafaf9;">
+      <p style="font-size: 12px; color: #78716c; text-align: center; margin: 0; line-height: 1.5;">
+        Sent automatically from the official schedule form at <a href="https://rugeriosroofing.com" style="color: #d95338; text-decoration: underline;">rugeriosroofing.com</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>`;
+}
