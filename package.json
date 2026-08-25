@@ -39,6 +39,13 @@
     "typescript": "5.7.3"
   },
   "pnpm": {
+    "onlyBuiltDependencies": [
+      "@tailwindcss/postcss",
+      "esbuild",
+      "msw",
+      "sharp",
+      "workerd"
+    ],
     "overrides": {
       "hono": "4.12.25"
     }
