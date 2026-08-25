@@ -99,7 +99,7 @@ export function ScheduleForm() {
             name="phone"
             type="tel"
             required
-            placeholder="(555) 123-4567"
+            placeholder="(331) 425-2332"
             className={fieldClass}
           />
         </div>

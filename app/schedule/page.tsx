@@ -4,6 +4,8 @@ import { SiteNavbar } from "@/components/site-navbar"
 import { SiteFooter } from "@/components/site-footer"
 import { ScheduleForm } from "@/components/schedule-form"
 
+import { business } from "@/lib/business"
+
 export const metadata: Metadata = {
   title: "Schedule a Free Inspection | Rugerios Roofing",
   description:
@@ -53,16 +55,16 @@ export default function SchedulePage() {
               </div>
 
               <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:gap-8">
-                <a href="tel:+15551234567" className="flex items-center gap-3 text-ink-foreground">
+                <a href={business.phoneHref} className="flex items-center gap-3 text-ink-foreground hover:text-primary transition-colors">
                   <Phone className="size-5 text-primary" />
-                  <span className="font-semibold">(555) 123-4567</span>
+                  <span className="font-semibold">{business.phoneDisplay}</span>
                 </a>
                 <a
-                  href="mailto:hello@rugeriosroofing.com"
-                  className="flex items-center gap-3 text-ink-foreground"
+                  href={business.emailHref}
+                  className="flex items-center gap-3 text-ink-foreground hover:text-primary transition-colors"
                 >
                   <Mail className="size-5 text-primary" />
-                  <span className="font-semibold">hello@rugeriosroofing.com</span>
+                  <span className="font-semibold">{business.email}</span>
                 </a>
               </div>
             </div>
