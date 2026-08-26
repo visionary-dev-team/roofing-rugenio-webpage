@@ -38,34 +38,22 @@ const values = [
 
 const galleryImages = [
   {
-    src: "/images/about/jorge-family.jpg",
-    title: "Family First",
-    caption: "Jorge with his family — the heart and foundation behind Rugerio's Roofing.",
-  },
-  {
-    src: "/images/about/jorge-work.jpg",
-    title: "Hands-On Leadership",
-    caption: "Jorge on site in Chicago, bringing safety, precision, and dedication to every project.",
-  },
-  {
-    src: "/images/about/jorge-mountain-summit.jpg",
-    title: "Climbing Mountains",
-    caption: "Summiting peaks — the discipline and endurance that keep Jorge grounded and driven.",
-  },
-  {
-    src: "/images/about/jorge-family-marathon.jpg",
-    title: "Chicago Marathon with Family",
-    caption: "Celebrating major endurance milestones with family by his side.",
-  },
-  {
     src: "/images/about/jorge-mountain-team.jpg",
     title: "Exploring Trails & Peaks",
     caption: "Outdoor adventures and mountain expeditions with teammates.",
+    alt: "Jorge hiking a mountain trail with a group of teammates",
   },
   {
     src: "/images/about/jorge-marathon.jpg",
     title: "Running & Discipline",
     caption: "Crossing the finish line — applying the same perseverance to business and life.",
+    alt: "Jorge crossing the finish line at a marathon",
+  },
+  {
+    src: "/images/about/jorge-marathon-bib.jpg",
+    title: "Race Day Ready",
+    caption: "Bib on, mindset locked in — the same preparation Jorge brings to every roofing project.",
+    alt: "Close-up of Jorge's marathon race bib before the start",
   },
 ]
 
@@ -364,7 +352,7 @@ export default function AboutPage() {
                   Moments On &amp; Off the Roof
                 </h2>
                 <p className="mt-3 text-muted-foreground">
-                  A look at our leader, our family values, and the active lifestyle behind Rugerio&apos;s Roofing.
+                  The discipline and endurance behind the work — a closer look at what keeps Jorge grounded off the job site.
                 </p>
               </Reveal>
             </div>
@@ -376,7 +364,7 @@ export default function AboutPage() {
                     <div className="overflow-hidden">
                       <Image
                         src={img.src}
-                        alt={img.title}
+                        alt={img.alt}
                         width={600}
                         height={450}
                         className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105"
