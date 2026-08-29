@@ -44,9 +44,6 @@
       "msw",
       "sharp",
       "workerd"
-    ],
-    "overrides": {
-      "hono": "4.12.25"
-    }
+    ]
   }
 }
