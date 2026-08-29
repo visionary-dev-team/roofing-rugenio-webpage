@@ -6,7 +6,7 @@ import { business } from "@/lib/business"
 const points = [
   { icon: Users, title: "Family-owned & local", detail: "You deal with the owners, not a call center. We live where we work." },
   { icon: Award, title: "Premium materials", detail: "Manufacturer-certified installs with warranties that actually mean something." },
-  { icon: Clock, title: "On time, every time", detail: "Clear timelines, tidy job sites, and crews that show up when they say." },
+  { icon: Clock, title: "On time, every time", detail: "Clear communication, efficient scheduling, and professional workmanship on every project." },
 ]
 
 export function WhyUs() {
@@ -41,11 +41,10 @@ export function WhyUs() {
               Why Rugerios
             </p>
             <h2 className="mt-3 text-balance font-display text-4xl font-black leading-tight tracking-tight text-foreground sm:text-5xl">
-              Craftsmanship you can stand under.
+              Taking care of your roof, start to finish.
             </h2>
             <p className="mt-5 max-w-lg text-pretty leading-relaxed text-muted-foreground">
-              We started Rugerios Roofing to raise the bar for what homeowners should expect:
-              honest quotes, premium work, and a crew that treats your home like their own.
+              At Rugerios Roofing, we believe every property deserves quality roofing, honest pricing, and dependable service. From commercial buildings to residential homes, our team is committed to doing the job right.
             </p>
           </Reveal>
 

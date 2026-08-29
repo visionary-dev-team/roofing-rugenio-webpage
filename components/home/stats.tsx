@@ -6,10 +6,10 @@ import { motion, useInView } from "motion/react"
 import { business, serviceAreas } from "@/lib/business"
 
 const stats = [
-  { value: business.roofsCompleted, suffix: "+", label: "Roofs completed" },
+  { value: business.roofsCompleted, suffix: "+", label: "Projects completed" },
   { value: business.yearsInBusiness, suffix: " yrs", label: "Years in business" },
   { value: serviceAreas.length, suffix: "", label: "Counties served" },
-  { value: 100, suffix: "%", label: "Satisfaction promise" },
+  { value: 100, suffix: "%", label: "Customer satisfaction " },
 ]
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {

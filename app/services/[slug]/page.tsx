@@ -87,7 +87,7 @@ export default async function ServicePage({
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/30" />
           <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6">
             <Reveal>
-              <nav aria-label="Breadcrumb" className="mb-5">
+              {/* <nav aria-label="Breadcrumb" className="mb-5">
                 <ol className="flex flex-wrap items-center gap-2 text-sm font-semibold text-ink-foreground/70">
                   <li>
                     <Link href="/" className="transition-colors hover:text-primary">
@@ -103,7 +103,7 @@ export default async function ServicePage({
                   <ChevronRight className="size-4" aria-hidden="true" />
                   <li className="text-primary">{service.title}</li>
                 </ol>
-              </nav>
+              </nav> */}
               <Link
                 href="/#services"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-ink-foreground/70 transition-colors hover:text-primary"
@@ -111,7 +111,8 @@ export default async function ServicePage({
                 <ArrowLeft className="size-4" />
                 All services
               </Link>
-              <h1 className="mt-5 max-w-3xl text-balance font-display text-5xl font-black leading-[0.95] tracking-tight text-ink-foreground sm:text-7xl">
+              <h1 className="mt-5 max-w-3xl text-balance font-display text-5xl font-black leading-[0.95] tracking-tight text-ink-foreground sm:text-7xl   text-primary "
+             style={{ WebkitTextStroke: "0.5px black" }}>
                 {service.title}
               </h1>
               <p className="mt-5 max-w-xl text-pretty text-lg leading-relaxed text-ink-foreground/75">

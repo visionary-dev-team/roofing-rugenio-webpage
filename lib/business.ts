@@ -12,7 +12,7 @@ export const business = {
   emailHref: "mailto:info@rugeriosroofing.com",
   priceRange: "$$",
   yearsInBusiness: 4,
-  roofsCompleted: 200,
+  roofsCompleted: 800,
   repairsCompleted: 600, 
   logo: "/images/rugerios-logo.png",
   heroImage: "/images/hero-roof.webp",

@@ -176,7 +176,7 @@ export default async function ServiceAreaPage({
                 {[
                   `${business.yearsInBusiness}+ years roofing homes across Northern Illinois`,
                   "Direct insurance claim support for hail and wind damage",
-                  "Licensed, insured, and warranty-backed installations",
+                  "#104019376 licensed roofing contractor unlimited.",
                   "Free, no-pressure inspections with a full photo report",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-pretty leading-relaxed text-foreground">

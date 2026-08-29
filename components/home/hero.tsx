@@ -41,14 +41,14 @@ export function Hero() {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-end px-4 pb-20 sm:px-6 lg:pb-28"
       >
-        <motion.p
+        {/* <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-primary"
         >
           {business.cityState} &middot; Family-owned roofing
-        </motion.p>
+        </motion.p> */}
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -70,20 +70,22 @@ export function Hero() {
           inspection today.
         </motion.p>
 
+          <div className="flex items-center gap-2 text-lg text-ink-foreground/70 font-bold mt-5">
+          <ShieldCheck className="size-5 text-primary" />
+            #104019376 licensed roofing contractor unlimited. 
+          </div>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
           className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center"
         >
+          
           <LinkButton href="/schedule" className="group h-13">
             Schedule Free Inspection
             <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
           </LinkButton>
-          <div className="flex items-center gap-2 text-sm text-ink-foreground/70">
-            <ShieldCheck className="size-5 text-primary" />
-            Licensed, insured &amp; warranty-backed
-          </div>
+          
         </motion.div>
       </motion.div>
     </section>
