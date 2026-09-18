@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteName: 'Rugerios Roofing',
     title: `Roofing Contractor in ${business.cityState} | Rugerios Roofing`,
     description: `Family-owned roofing contractor serving ${business.city}, ${business.state}. Roof replacement, repair, storm damage & free inspections.`,
-    images: [{ url: business.heroImage, width: 1024, height: 1024, alt: 'Rugerios Roofing crew installing a new roof' }],
+    images: [{ url: business.heroImage, width: 1920, height: 2560, alt: 'Rugerios Roofing crew installing roofing membrane' }],
   },
   twitter: {
     card: 'summary_large_image',

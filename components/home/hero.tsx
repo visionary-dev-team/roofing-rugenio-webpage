@@ -25,13 +25,13 @@ export function Hero() {
         className="absolute inset-0"
       >
         <img
-          src="/images/hero-roof.webp"
-          alt="Rugerios Roofing crew installing new architectural shingles in Aurora, IL"
-          width={1024}
-          height={1024}
+          src={business.heroImage}
+          alt="Rugerios Roofing crew installing roofing membrane in Aurora, IL"
+          width={1920}
+          height={2560}
           fetchPriority="high"
           decoding="async"
-          className="size-full object-cover"
+          className="size-full object-cover object-[center_20%]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/40 to-ink" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/80 to-transparent" />

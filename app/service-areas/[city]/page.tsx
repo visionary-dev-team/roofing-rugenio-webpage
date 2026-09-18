@@ -31,7 +31,7 @@ export async function generateMetadata({
       url: `${business.domain}/service-areas/${area.slug}`,
       title,
       description: `Trusted roofing contractor serving ${area.name} County, ${business.state}.`,
-      images: [{ url: business.heroImage, width: 1024, height: 1024 }],
+      images: [{ url: business.heroImage, width: 1920, height: 2560 }],
     },
   }
 }
@@ -45,14 +45,44 @@ export default async function ServiceAreaPage({
   const area = getServiceArea(city)
   if (!area) notFound()
 
+  const serviceAreaSchema = {
+    "@context": "https://schema.org",
+    "@type": "RoofingContractor",
+    "@id": `${business.domain}/#business`,
+    name: business.name,
+    url: business.domain,
+    telephone: business.phoneDisplay,
+    priceRange: business.priceRange,
+    image: `${business.domain}${business.heroImage}`,
+    areaServed: {
+      "@type": "AdministrativeArea",
+      name: `${area.name} County`,
+      containedInPlace: {
+        "@type": "State",
+        name: "Illinois",
+      },
+    },
+  }
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: business.domain },
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: business.domain,
+      },
       {
         "@type": "ListItem",
         position: 2,
+        name: "Service Areas",
+        item: `${business.domain}/service-areas`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
         name: `${area.name} County`,
         item: `${business.domain}/service-areas/${area.slug}`,
       },
@@ -61,6 +91,10 @@ export default async function ServiceAreaPage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceAreaSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -72,11 +106,11 @@ export default async function ServiceAreaPage({
           <img
             src={business.heroImage || "/placeholder.svg"}
             alt={`Roofing services in ${area.name} County, ${business.state}`}
-            width={1024}
-            height={1024}
+            width={1920}
+            height={2560}
             fetchPriority="high"
             decoding="async"
-            className="absolute inset-0 size-full object-cover opacity-60"
+            className="absolute inset-0 size-full object-cover object-[center_20%] opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/40" />
           <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6">
