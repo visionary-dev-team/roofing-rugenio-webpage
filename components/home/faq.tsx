@@ -23,10 +23,10 @@ const faqs = [
     q: "What warranty coverage do you offer?",
     a: "Your new roof is protected by both a manufacturer warranty on the materials and our own workmanship warranty on the installation. We install manufacturer-certified systems and walk you through exactly what each warranty covers before work begins.",
   },
-  {
-    q: "Do you offer financing?",
-    a: "Yes. We offer flexible financing options so a new roof fits your budget, along with free estimates. Ask about current financing plans during your free inspection and we will help you find an option that works for you.",
-  },
+  // {
+  //   q: "Do you offer financing?",
+  //   a: "Yes. We offer flexible financing options so a new roof fits your budget, along with free estimates. Ask about current financing plans during your free inspection and we will help you find an option that works for you.",
+  // },
 ]
 
 const faqSchema = {

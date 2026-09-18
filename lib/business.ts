@@ -16,6 +16,12 @@ export const business = {
   repairsCompleted: 600, 
   logo: "/images/rugerios-logo.png",
   heroImage: "/images/hero-roof.webp",
+  homeAdvisorUrl: "https://www.homeadvisor.com/rated.Rugerioscommercial.117513394.html",
+  rating: {
+    score: 5.0,
+    reviewCount: 17,
+    source: "HomeAdvisor",
+  },
   // Approximate coordinates for Aurora, IL.
   geo: { latitude: 41.7606, longitude: -88.3201 },
   hours: {

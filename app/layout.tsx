@@ -62,6 +62,14 @@ const roofingContractorSchema = {
   telephone: business.phoneDisplay,
   email: business.email,
   priceRange: business.priceRange,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: '17',
+    bestRating: '5',
+    worstRating: '1',
+  },
+  sameAs: [business.homeAdvisorUrl],
   address: {
     '@type': 'PostalAddress',
     addressLocality: business.city,
