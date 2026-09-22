@@ -17,9 +17,9 @@ export function WhyUs() {
           <div className="relative">
             <div className="overflow-hidden rounded-3xl">
               <img
-                src="/images/team.webp"
-                alt="The Rugerios Roofing crew in front of a finished home in Aurora, IL"
-                width={1024}
+                src="/images/about/teams-about.jpeg"
+                alt="The Rugerios Roofing crew in front of their work truck in Aurora, IL"
+                width={768}
                 height={1024}
                 loading="lazy"
                 decoding="async"
