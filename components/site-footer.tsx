@@ -56,6 +56,11 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/#projects" className="text-ink-foreground/70 hover:text-primary">
+                  Projects &amp; Portfolio
+                </Link>
+              </li>
+              <li>
                 <Link href="/#why" className="text-ink-foreground/70 hover:text-primary">
                   Why Rugerios
                 </Link>

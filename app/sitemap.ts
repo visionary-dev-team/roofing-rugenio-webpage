@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 import { business, serviceAreas } from "@/lib/business"
-import { services } from "@/lib/services"
+import { services, fetchPortfolioFromAPI } from "@/lib/services"
 import { getAllBlogPosts } from "@/lib/blog"
 
 export const dynamic = "force-static"
@@ -38,5 +38,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  return [...staticRoutes, ...serviceRoutes, ...serviceAreaRoutes, ...blogRoutes]
+  const portfolio = await fetchPortfolioFromAPI()
+  const projectRoutes: MetadataRoute.Sitemap = portfolio.map((proj) => ({
+    url: `${base}/projects/${proj.id}`,
+    lastModified: proj.completedAt ? new Date(proj.completedAt) : lastModified,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }))
+
+  return [...staticRoutes, ...serviceRoutes, ...serviceAreaRoutes, ...blogRoutes, ...projectRoutes]
 }

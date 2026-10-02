@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Menu, Phone, X } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -11,15 +12,21 @@ import { business } from "@/lib/business"
 const links = [
   { href: "/about", label: "About" },
   { href: "/#services", label: "Services" },
+  { href: "/#projects", label: "Projects" },
   { href: "/#process", label: "Process" },
   { href: "/#why", label: "Why Us" },
   { href: "/#reviews", label: "Reviews" },
   { href: "/blog", label: "Blog" },
 ]
 
-export function SiteNavbar() {
+interface SiteNavbarProps {
+  solid?: boolean
+}
+
+export function SiteNavbar({ solid }: SiteNavbarProps = {}) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -28,11 +35,17 @@ export function SiteNavbar() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  // On inner pages (like /projects/...), or when scrolled, or when solid=true, show solid dark background
+  const isHomePage = pathname === "/"
+  const isSolid = solid !== undefined ? solid : (!isHomePage || scrolled)
+
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "bg-ink/90 backdrop-blur-md shadow-lg" : "bg-transparent",
+        isSolid
+          ? "bg-ink/95 backdrop-blur-md shadow-lg border-b border-white/10"
+          : "bg-transparent",
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-20">

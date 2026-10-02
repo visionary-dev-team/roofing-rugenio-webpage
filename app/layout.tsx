@@ -101,8 +101,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`bg-background ${inter.variable} ${archivo.variable}`}>
-      <body className="font-sans antialiased">
+    <html lang="en" suppressHydrationWarning className={`bg-background ${inter.variable} ${archivo.variable}`}>
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(roofingContractorSchema) }}

@@ -3,14 +3,18 @@ import { SiteFooter } from "@/components/site-footer"
 import { Hero } from "@/components/home/hero"
 import { Marquee } from "@/components/home/marquee"
 import { ServicesSection } from "@/components/home/services-section"
+import { ProjectsGallery } from "@/components/home/projects-gallery"
 import { Stats } from "@/components/home/stats"
 import { Process } from "@/components/home/process"
 import { WhyUs } from "@/components/home/why-us"
 import { Reviews } from "@/components/home/reviews"
 import { FAQ } from "@/components/home/faq"
 import { CTA } from "@/components/home/cta"
+import { fetchPortfolioFromAPI } from "@/lib/services"
 
-export default function Home() {
+export default async function Home() {
+  const projects = await fetchPortfolioFromAPI()
+
   return (
     <>
       <SiteNavbar />
@@ -18,6 +22,7 @@ export default function Home() {
         <Hero />
         <Marquee />
         <ServicesSection />
+        <ProjectsGallery projects={projects} />
         <Stats />
         <Process />
         <WhyUs />
