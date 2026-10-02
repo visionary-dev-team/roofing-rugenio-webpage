@@ -14,6 +14,7 @@ const links = [
   { href: "/#process", label: "Process" },
   { href: "/#why", label: "Why Us" },
   { href: "/#reviews", label: "Reviews" },
+  { href: "/blog", label: "Blog" },
 ]
 
 export function SiteNavbar() {

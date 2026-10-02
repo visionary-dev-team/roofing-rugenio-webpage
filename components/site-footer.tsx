@@ -75,6 +75,11 @@ export function SiteFooter() {
                   Free Inspection
                 </Link>
               </li>
+              <li>
+                <Link href="/blog" className="text-ink-foreground/70 hover:text-primary">
+                  Roofing Blog &amp; Guides
+                </Link>
+              </li>
             </ul>
           </div>
 
